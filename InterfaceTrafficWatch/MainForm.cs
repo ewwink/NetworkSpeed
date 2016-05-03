@@ -48,25 +48,28 @@ namespace InterfaceTrafficWatch
         private void InitializeNetworkInterface()
         {
             nicArr = NetworkInterface.GetAllNetworkInterfaces();
-            List<string> goodAdapters = new List<string>();
+            List<NetworkInterface> goodAdapters = new List<NetworkInterface>();
 
             foreach (NetworkInterface nicnac in nicArr)
             {
-                if ( nicnac.SupportsMulticast && nicnac.GetIPv4Statistics().UnicastPacketsReceived >= 1 && nicnac.OperationalStatus.ToString() == "Up")
+                var ipv4Stat = nicnac.GetIPv4Statistics();
+                var status = nicnac.OperationalStatus;
+
+                if ( nicnac.SupportsMulticast && ipv4Stat.UnicastPacketsReceived >= 1 && nicnac.OperationalStatus == OperationalStatus.Up)
                 {
-                    goodAdapters.Add(nicnac.Name);
+                    goodAdapters.Add(nicnac);
                     //cmbInterface.Items.Add(nicnac.Name);
                 }
-
             }
             if (goodAdapters.Count != cmbInterface.Items.Count && goodAdapters.Count != 0)
             {
                 cmbInterface.Items.Clear();
-                foreach (string gadpt in goodAdapters)
+                cmbInterface.DisplayMember = "Name";
+                foreach (var gadpt in goodAdapters)
                 {
                     cmbInterface.Items.Add(gadpt);
                 }
-                 cmbInterface.SelectedIndex = 0;   
+                 cmbInterface.SelectedIndex = 0;
             }
             if (goodAdapters.Count == 0) cmbInterface.Items.Clear();
         }
@@ -89,15 +92,14 @@ namespace InterfaceTrafficWatch
         private void UpdateNetworkInterface()
         {
             //MessageBox.Show(cmbInterface.Items.Count.ToString());
-            if (cmbInterface.Items.Count >= 1)
-            {
-                // Grab NetworkInterface object that describes the current interface
-                NetworkInterface nic = nicArr[cmbInterface.SelectedIndex];
 
+            // Grab NetworkInterface object that describes the current interface
+            var nic = cmbInterface.SelectedItem as NetworkInterface;
+            if (nic != null)
+            {   
                 // Grab the stats for that interface
                 IPv4InterfaceStatistics interfaceStats = nic.GetIPv4Statistics();
                 
-
                 int bytesSentSpeed = (int)(interfaceStats.BytesSent - double.Parse(lblBytesSent.Text)) / 1024;
                 int bytesReceivedSpeed = (int)(interfaceStats.BytesReceived - double.Parse(lblBytesReceived.Text)) / 1024;
 
