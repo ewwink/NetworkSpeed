@@ -98,8 +98,8 @@ namespace InterfaceTrafficWatch
                 IPv4InterfaceStatistics interfaceStats = nic.GetIPv4Statistics();
                 
 
-                int bytesSentSpeed = (int)(interfaceStats.BytesSent - double.Parse(lblBytesSent.Text)) / 1024;
-                int bytesReceivedSpeed = (int)(interfaceStats.BytesReceived - double.Parse(lblBytesReceived.Text)) / 1024;
+                long bytesSentSpeed = (long)(interfaceStats.BytesSent - double.Parse(lblBytesSent.Text)) / 1024;
+                long bytesReceivedSpeed = (long)(interfaceStats.BytesReceived - double.Parse(lblBytesReceived.Text)) / 1024;
 
                 // Update the labels
                 lblSpeed.Text = nic.Speed.ToString();
