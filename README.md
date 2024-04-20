@@ -16,5 +16,5 @@ Compiled app can be downloaded from [Realease page](https://github.com/ewwink/Ne
 - Windows 7 and older download and install [.Net Framework 4.6.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net462)
 
 ## Screenshot
-[![Network Speed V1.1](https://raw.githubusercontent.com/ewwink/NetworkSpeed/master/NetworkSpeed/networkspeed.jpg)]
+![Network Speed V1.1](https://raw.githubusercontent.com/ewwink/NetworkSpeed/master/NetworkSpeed/networkspeed.jpg)
 
