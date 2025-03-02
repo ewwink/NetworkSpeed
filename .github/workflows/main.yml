@@ -10,11 +10,11 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.1.0
+        uses: actions/checkout@v4
         id: checkout_code
             
       - name: Setup MSBuild and add to PATH
-        uses: microsoft/setup-msbuild@v1.0.0
+        uses: microsoft/setup-msbuild@v2
         id: setup_msbuild
               
       - name: Run MSBuild
@@ -25,5 +25,5 @@ jobs:
           msbuild .\NetworkSpeed.sln  /t:build /p:Configuration=Debug
       - uses: actions/upload-artifact@v4
         with:
-          name: my-artifact
+          name: NetworkSpeed
           path: .\NetworkSpeed\bin\Debug\
