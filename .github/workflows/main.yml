@@ -23,3 +23,7 @@ jobs:
           msbuild .\NetworkSpeed.sln  /t:clean /p:Configuration=Debug
           nuget restore .\NetworkSpeed.sln
           msbuild .\NetworkSpeed.sln  /t:build /p:Configuration=Debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: .\bin\Debug\
