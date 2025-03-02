@@ -6,7 +6,7 @@ jobs:
     runs-on: windows-latest
     env:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-    name: Run MSBuild
+    name: Auto Build NetworkSpeed
     
     steps:
       - name: Checkout code
